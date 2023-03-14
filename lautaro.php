@@ -1,27 +1,19 @@
 <?php
-$absoluta =  dirname(__DIR__);
+//$absoluta =  dirname(__DIR__);
 include_once "includes/header.php";
-
 ?>
 
-
-
-
-
-
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+    <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>PLANILLA DE ENTREGA</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>PLANILLA DE ENTREGA</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -44,56 +36,27 @@ include_once "includes/header.php";
                             <input class="form-control form-control-lg" type="text"  autocomplete="off" id="qr">
                         </div> 
                     </div>
-            
-                
-                
-                
-            </div>
-            <div class="card-footer" id="boton" hidden>
+                </div>
+            <div class="card-footer" id="boton">
                 <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>--->
-                <button type="submit" id="registrar" class="btn btn-primary btn-lg text-center">BUSCAR</button>
+                <button type="submit" id="buscar" class="btn btn-primary btn-lg text-center">BUSCAR</button>
             </div>
         </form>    
         </div>
     </div>
 </div>  
-
-          
-            <?php
-               
-
-                $string = "https://camaravm.com.ar/autogestion/seguimientoPlanilla/26e9178e2356968959ba0dd25f7f0d1e2f7596b97bf0122ab170ae356aae01e9";
-                $varst = trim($string, "https://camaravm.com.ar/autogestion/seguimientoPlanilla/");
-
-                
-            ?>
+    <?php
+        $string = "https://camaravm.com.ar/autogestion/seguimientoPlanilla/26e9178e2356968959ba0dd25f7f0d1e2f7596b97bf0122ab170ae356aae01e9";
+        $varst = trim($string, "https://camaravm.com.ar/autogestion/seguimientoPlanilla/");
+    ?>
         </div>
         <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
-
+    </div>
+    <!-- /.card -->
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 <?php
-include_once "includes/footer.php";
+    include_once "includes/footer.php";
 ?>
