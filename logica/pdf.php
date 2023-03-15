@@ -1,6 +1,6 @@
 <?php
-require_once '../vendor/autoload.php';
-require_once '../reporte/index.php';
+require '../vendor/autoload.php';
+require '../reporte/index.php';
 //require_once 'consultasbd.php';
 
 
@@ -11,6 +11,6 @@ $plantilla=getPlantilla();
 $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
 
-$mpdf->output("miarchivopdf","I");
+$mpdf->output("CamaraFarmacias","I");
 
 

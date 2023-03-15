@@ -1,26 +1,29 @@
 <?php
 
+
+
 function getPlantilla(){
-$contenido='
+    date_default_timezone_set('America/Argentina/Cordoba'); 
+    $fecha = date('d-m-Y H:i');
+
+  $plantilla='
   <body>
  <header class="clearfix">
       <div id="logo">
-        <img src="./logo.png"  width= "100" height="90">
+        <img src="../dist/img/imgCam/logo-circulo.png"  width= "90" height="90">
       </div>
       <div id="company" class="clearfix">
-        <div><h2>MI EMPRESA SA DE CV</h2></div>
+        <div><h2>CAMARA DE FARMACIAS DEL CENTRO ARGENTINO</h2></div>
         
-        <div>HEHD000000123</div>
-        <div>Av. Robles, Comitan, Chiapas</div>
-		<div>960000000</div>
+        <div>Direccion: Alvear 874 Villa Maria, Cordoba</div>
+        <div>Tel: (0353)4533465 / 4534916 / 4521777</div>
+		<div>E-Mail: obrassociales@camaravm.com.ar</div>
       </div>
 	  <br>
       <div id="project">
-        <div><span>CLIENTE: </span> Alberto Herrera Aguilar</div>
+        <div><span>FECHA RECEPCION: <b>'.$fecha.'</b></span></div>
       </div>
-	   <div id="project2">
-        <div><span>FECHA: </span> 05/02/2023</div>
-      </div>
+	  
     </header>
     <main>
 			<p>Desglose de productos</p>
@@ -44,7 +47,7 @@ $contenido='
     </footer>
     </body>';
 
-    return $contenido;
+    return $plantilla;
 
   }
 

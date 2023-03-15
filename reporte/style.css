@@ -69,7 +69,7 @@
     
     #logo {
         float: left;
-        margin-top: -90px;
+        margin-top: -35px;
     }
     
     #logo img {
@@ -83,6 +83,7 @@
     #company {
         float: right;
         text-align: right;
+        margin-top: -85px;
     }
     
     #details {

@@ -2,6 +2,9 @@ $(document).ready(function() {
     function validarQR (string){
         if (string.length >= 1) {
             if (string.includes('https://camaravm.com.ar/autogestion/')) {
+                //const string = 'https://camaravm.com.ar/autogestion/seguimientoPlanilla/726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387'
+                const cod = string.slice(56)
+                console.log(cod) 
                 $('#modalPDF').modal('show');
             }else{
                 Swal.fire({
@@ -33,7 +36,13 @@ $(document).ready(function() {
         event.preventDefault();    
         document.getElementById("formQR").reset();
     });
-    
+
+    $(document).on('click','#i',function(event){
+        event.preventDefault();    
+        let qr = document.getElementById('qr').value;
+        $("#qr").val('https://camaravm.com.ar/autogestion/seguimientoPlanilla/726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387');
+        //validarQR(qr)
+    })
 });
 
 
