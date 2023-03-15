@@ -28,6 +28,7 @@ $(document).ready(function() {
         validarQR(qr)
     });
     
+    
     $(document).on('click','#cerrarPDF',function(event){
         event.preventDefault();    
         document.getElementById("formQR").reset();
