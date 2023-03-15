@@ -1,36 +1,50 @@
 $(document).ready(function() {
+    function input(){
+        const clickInput = document.getElementById('qr');
+        //$('#tipoVenta').trigger("reset");
+        $(clickInput).click();
+        clickInput.addEventListener('click')
+    
+    }
+    input();
 
-    
-    
-    
-    function validarPagina (string){
-        if (string.includes('https://camaravm.com.ar/autogestion/')) {
-            alert('IMPRIMIR RECEPCION')
+    function validarQR (string){
+        if (string.length >= 1) {
+            if (string.includes('https://camaravm.com.ar/autogestion/')) {
+                alert('IMPRIMIR RECEPCION');
+                
+                document.getElementById("formQR").reset();
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'CODIGO QR NO VALIDO',
+                    text: 'el siguiente codigo no es valido'
+                })
+
+                document.getElementById("formQR").reset();
+
+            }
         }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'QR NO VALIDO',
-                text: 'el siguiente codigo no es valido'
-              })
+            Swal.fire(
+                'CODIGO QR VACIO',
+                'por favor escane el codigo QR',
+                'question'
+            )
         }
     }
 
     $(document).on('click','#buscar',function(event){
         event.preventDefault();    
         let qr = document.getElementById('qr').value;
-        if (qr.length >= 1) {
-            validarPagina(qr);
-        }else{
-            Swal.fire(
-                'QR VACIO',
-                'por favor escane el codigo QR',
-                'question'
-              )
-        }
-        
+        validarQR(qr)
     });
-
+    
 });
+
+
+
+
+
 
 
 

@@ -25,7 +25,7 @@ include_once "includes/header.php";
         <form id="formQR">    
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label for="" class="col-form-label" id="importec" >ESCANEE SU CODIGO QR</label>
                         <div class="input-group mb-3">
@@ -37,7 +37,7 @@ include_once "includes/header.php";
                         </div> 
                     </div>
                 </div>
-            <div class="card-footer" id="boton">
+            <div class="card-footer" id="boton" hidden>
                 <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>--->
                 <button type="submit" id="buscar" class="btn btn-primary btn-lg text-center">BUSCAR</button>
             </div>
