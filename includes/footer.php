@@ -22,5 +22,7 @@
 <!-- Funcion propia -->
 <script type="text/javascript" src="js/function.js"></script> 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
