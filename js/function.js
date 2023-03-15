@@ -1,19 +1,8 @@
 $(document).ready(function() {
-    function input(){
-        const clickInput = document.getElementById('qr');
-        //$('#tipoVenta').trigger("reset");
-        $(clickInput).click();
-        clickInput.addEventListener('click')
-    
-    }
-    input();
-
     function validarQR (string){
         if (string.length >= 1) {
             if (string.includes('https://camaravm.com.ar/autogestion/')) {
-                alert('IMPRIMIR RECEPCION');
-                
-                document.getElementById("formQR").reset();
+                $('#modalPDF').modal('show');
             }else{
                 Swal.fire({
                     icon: 'error',
@@ -37,6 +26,11 @@ $(document).ready(function() {
         event.preventDefault();    
         let qr = document.getElementById('qr').value;
         validarQR(qr)
+    });
+    
+    $(document).on('click','#cerrarPDF',function(event){
+        event.preventDefault();    
+        document.getElementById("formQR").reset();
     });
     
 });
