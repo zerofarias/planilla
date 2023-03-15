@@ -7,7 +7,7 @@ $(document).ready(function() {
                 Swal.fire({
                     icon: 'error',
                     title: 'CODIGO QR NO VALIDO',
-                    text: 'el siguiente codigo no es valido'
+                    text: 'no se encuentra codigo , o el mismo no es valido'
                 })
 
                 document.getElementById("formQR").reset();
@@ -28,7 +28,7 @@ $(document).ready(function() {
         validarQR(qr)
     });
     
-    
+
     $(document).on('click','#cerrarPDF',function(event){
         event.preventDefault();    
         document.getElementById("formQR").reset();
