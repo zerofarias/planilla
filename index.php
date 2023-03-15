@@ -65,7 +65,8 @@ include_once "includes/header.php";
         </button>
       </div>
       <div class="modal-body">
-      <iframe id="pdf" width="100%" height="400" style="visibility:visible" src="logica/pdf.php"></iframe>
+      <!---<iframe id="pdf" width="100%" height="400" style="visibility:visible" ></iframe>--->
+      <p>Dale un vistazo <a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" id="cerrarPDF">Cerrar</button>

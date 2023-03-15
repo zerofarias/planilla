@@ -2,9 +2,21 @@ $(document).ready(function() {
     function validarQR (string){
         if (string.length >= 1) {
             if (string.includes('https://camaravm.com.ar/autogestion/')) {
-                //const string = 'https://camaravm.com.ar/autogestion/seguimientoPlanilla/726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387'
                 const cod = string.slice(56)
-                console.log(cod) 
+                
+                
+            $.ajax({
+              url: "pdf/pdf.php",
+              method: "POST",
+              data: { cod: cod },
+              datatype: "json",
+              success: function(data) {
+                console.log(data);
+                let dir = document.getElementById('pdf');
+                var url = $(dir).attr( "src", "pdf/"+cod+".pdf" );
+                console.log(cod);
+              }
+            })
                 $('#modalPDF').modal('show');
             }else{
                 Swal.fire({
