@@ -2,7 +2,7 @@
 
 
 
-function getPlantilla(){
+function getPlantilla($cod){
     date_default_timezone_set('America/Argentina/Cordoba'); 
     $fecha = date('d-m-Y H:i');
 

@@ -6,7 +6,7 @@
 
 if (isset($_POST['cod'])) {
 
-$url = $_POST['cod'].'.pdf'
+$url = $_POST['cod'].'.pdf';
 
 $mpdf=new \Mpdf\Mpdf();
 $css=file_get_contents("../reporte/style.css");
