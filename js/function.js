@@ -82,7 +82,7 @@ $(document).ready(function() {
     $(document).on('click','#nuevo',function(event){
         //event.preventDefault();    
         $('#modalEnvio').modal('show');
-        console.log('sgsggsgfs');
+        
     });
 
 
