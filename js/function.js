@@ -8,18 +8,18 @@ $(document).ready(function() {
                     method: "POST",
                     data: { cod: cod, opcion:1 },
                     datatype: "json",
-                    success: function(data) {
-                        let dir = document.getElementById('pdf');
-                        var url = $(dir).attr( "src", "pdf/"+cod+".pdf" );
-                        $('#modalPDF').modal('show');
-                    },
-                    error: function(data) { 
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'ERROR : '+data,
-                            text: 'Comuniquese con el administrador'
-                        })
-                    },
+                        success: function(data) {
+                            let dir = document.getElementById('pdf');
+                            var url = $(dir).attr( "src", "pdf/"+cod+".pdf" );
+                            $('#modalPDF').modal('show');
+                        },
+                        error: function(data) { 
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'ERROR : '+data,
+                                text: 'Comuniquese con el administrador'
+                            })
+                        },
                 })
         }else{
                 Swal.fire({
@@ -77,6 +77,12 @@ $(document).ready(function() {
         event.preventDefault();    
         let qr = document.getElementById('qr').value;
         BorrarPDF(qr);
+    });
+
+    $(document).on('click','#nuevo',function(event){
+        //event.preventDefault();    
+        $('#modalEnvio').modal('show');
+        console.log('sgsggsgfs');
     });
 
 

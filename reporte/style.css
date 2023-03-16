@@ -127,18 +127,14 @@
     
     div.puntos {
         position: absolute;
-        top: 985px;
-        right: 20;
-        width: 200px;
-        height: 100px;
+        margin-top: 600px;
+        height: 19px;
     }
     
     div.puntose {
         position: absolute;
-        top: 985px;
-        right: 295;
-        width: 200px;
-        height: 100px;
+        height: 90px;
+        
     }
     
     div.puntosl {
