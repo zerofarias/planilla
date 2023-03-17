@@ -1,10 +1,14 @@
 <?php
+    require('../logica/conex.php');
+    $objeto = new Conexion();
+    $conexion = $objeto->Conectar();
     require '../vendor/autoload.php';
     require '../reporte/index.php';
+    require('../logica/con_db.php');
+
 
     $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
     $cod = (isset($_POST['cod'])) ? $_POST['cod'] : '';
-
 
     switch ($opcion){
         case 1:
@@ -29,9 +33,58 @@
                     json_encode($url, JSON_UNESCAPED_UNICODE);
                 }
             break;
-        
-        default:
-            # code...
+        case 4:
+            $consulta = "SELECT * FROM `encomiendas_datos` WHERE cod_encomiendas IS NULL";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();        
+            $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
             break;
-    }
+        case 5:
+                $buscarHash = "SELECT hashCabezal,nombre,quincena,fecha_creacion,f.idFarmacia FROM cabezal AS c
+                                    INNER JOIN farmacia AS f  ON f.idFarmacia = c.idFarmacia
+                                    WHERE hashCabezal = '$cod' ";
+                $buscarHash = mysqli_query($conex , $buscarHash);
+                $busqueda = mysqli_fetch_assoc($buscarHash);
+
+                
+                $hashCabezal = $busqueda['hashCabezal'];
+                $nombre = $busqueda['nombre'];
+                $quincena = $busqueda['quincena'];
+                $fecha_creacion = $busqueda['fecha_creacion'];
+                $farm = $busqueda['idFarmacia'];
+
+                if (strlen($nombre) > 1) {
+                        $sqlEstadoCaja = "SELECT COUNT(cod_encomienda_datos) AS cantidad FROM `encomiendas_datos` WHERE cod_encomiendas IS NULL AND hashCabezal = '$cod' ";
+                        $queryEstadoCaja = mysqli_query($conex , $sqlEstadoCaja);
+                        $duplicado = mysqli_fetch_assoc($queryEstadoCaja);
+                
+                        if ($duplicado['cantidad'] == 0) {
+                                $sqlInsert = "INSERT INTO `encomiendas_datos`( `hashCabezal`, `nombre`, `quincena`, `fecha_creacion`, `farm`) VALUES ('$hashCabezal', '$nombre', '$quincena', '$fecha_creacion', '$farm') ";
+                                $queryInsert = mysqli_query($conex , $sqlInsert);
+                                $data = 1;
+                        }else{
+                            $data = 2;
+                        }
+                }else{
+                    $data = 3;    
+                }
+                
+            break;
+        case 6:
+                $sqlEstadoCaja = "SELECT COUNT(cod_encomienda_datos) AS cantidad FROM `encomiendas_datos` WHERE cod_encomiendas IS NULL";
+                $queryEstadoCaja = mysqli_query($conex , $sqlEstadoCaja);
+                $data = mysqli_fetch_assoc($queryEstadoCaja);
+                $data['cantidad'];
+
+            break;
+        case 7:
+            $sqlEstadoCaja = "DELETE FROM `encomiendas_datos` WHERE `hashCabezal` = '$cod' AND cod_encomiendas IS NULL";
+            $queryEstadoCaja = mysqli_query($conex , $sqlEstadoCaja);
+            $data = mysqli_fetch_assoc($queryEstadoCaja);
+            $data['cantidad'];
+
+        break;
+        }
+        print json_encode($data, JSON_UNESCAPED_UNICODE);//envio el array final el formato json a AJAX
+        $conexion=null;
 

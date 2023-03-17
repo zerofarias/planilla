@@ -19,37 +19,87 @@ include_once "includes/header.php";
     <!-- Main content -->
     <section class="content">
     <!-- Default box -->
-    <div class="card">
-        
-        <div class="card-body">
-            <form id="formQR">    
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="" class="col-form-label" id="importec" >ESCANEE SU CODIGO QR</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"  style="font-size: 20px"><span class="material-symbols-outlined">qr_code_scanner</span>
-                                </span>
+            <div class="card">
+                <div class="card-body">
+                    <form id="formQR">    
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label" id="importec" >ESCANEE SU CODIGO QR</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"  style="font-size: 20px"><span class="material-symbols-outlined">qr_code_scanner</span>
+                                        </span>
+                                    </div>
+                                        <input class="form-control form-control-lg" type="text"  autocomplete="off" id="qr">
+                                    </div> 
+                                </div>
                             </div>
-                                <input class="form-control form-control-lg" type="text"  autocomplete="off" id="qr">
-                            </div> 
+                        <div class="card-footer" id="boton">
+                            <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>--->
+                            <button type="submit" id="buscar" class="btn btn-primary btn-lg text-center">BUSCAR</button>
+                            <button type="button" id="i" class="btn btn-primary btn-lg text-center">agregar</button>
+                            <button type="button" id="nuevo" class="btn btn-primary btn-lg text-center">GENERAR PLANILLA</button>
+                            <a href="#iptCodigoVenta">
+                                    <button id="qr" hidden></button>
+                            </a>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>  
+    </div>
+
+
+
+    <div class="card" id="bloque">
+                <div class="card-body">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        
+                                        <h3 id="cantidad"></h3>
+                                        <!--<input class="form-control form-control-lg" type="text"  autocomplete="off" id="qr">--->
+                                        <div class="col-md-12">
+                    <table id="lstProductosVenta" class="display nowrap table-striped w-100 shadow ">
+                        <thead class="text-center bg-info fs-6">
+                            <tr>
+                                <th class="text-center" hidden>Codigo</th>
+                                <th class="text-center">Farmacia</th>
+                                <th class="text-center">Quincena</th>
+                                <th class="text-center">Fecha Creacion</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class=" text-center fs-6">
+
+                        </tbody>
+                    </table>
+                    <!-- / table -->
+                </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        <div class="card-footer" id="boton">
+                            <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>--->
+                            <button type="button" id="nuevo" class="btn btn-primary btn-lg text-center">GENERAR PLANILLA</button>
                         </div>
                     </div>
-                <div class="card-footer" id="boton">
-                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>--->
-                    <button type="submit" id="buscar" class="btn btn-primary btn-lg text-center">BUSCAR</button>
-                    <button type="button" id="i" class="btn btn-primary btn-lg text-center">agregar</button>
-                    <button type="button" id="nuevo" class="btn btn-primary btn-lg text-center">GENERAR PLANILLA</button>
                 </div>
-            </form>    
+            </div>  
         </div>
-    </div>
-</div>  
-        </div>
+
+
+
+
+
+
         <!-- /.card-footer-->
+        <input type="text" name="" id="">
     </div>
+
     <!-- /.card -->
     </section>
     <!-- /.content -->
