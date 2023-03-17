@@ -53,7 +53,7 @@ include_once "includes/header.php";
 
 
 
-    <div class="card" id="bloque">
+    <div class="card" id="bloque" hidden>
                 <div class="card-body">
                         <div class="modal-body">
                             <div class="row">
