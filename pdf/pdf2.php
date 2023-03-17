@@ -1,23 +1,15 @@
 <?php
     require '../vendor/autoload.php';
     require '../reporte/index.php';
-
-    $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
-    $cod = (isset($_POST['cod'])) ? $_POST['cod'] : '';
-
-
-    $url = 'fake.pdf';
-    $_POST['cod'] = '726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387';
-                    
-                    $mpdf=new \Mpdf\Mpdf();
-                    $css=file_get_contents("../reporte/style.css");
-                    $plantilla=getPlantilla($_POST['cod']);
-                    $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
-                    $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
-                    $mpdf->output($url,"I");
-                    json_encode($url, JSON_UNESCAPED_UNICODE);
-
-
+    $cod=38;
+    $data = $cod.'.pdf';
+                        
+                        $mpdf=new \Mpdf\Mpdf();
+                        $css=file_get_contents("../reporte/style.css");
+                        $plantilla=getPlantilla($cod);
+                        $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
+                        $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
+                        $mpdf->output($data,"I");
 
 
 

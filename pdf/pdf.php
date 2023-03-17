@@ -9,28 +9,45 @@
 
     $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
     $cod = (isset($_POST['cod'])) ? $_POST['cod'] : '';
+    $comisionista = (isset($_POST['comisionista'])) ? $_POST['comisionista'] : '';
+    $importe = (isset($_POST['importe'])) ? $_POST['importe'] : '';
+    $comentario = (isset($_POST['comentario'])) ? $_POST['comentario'] : '';
 
     switch ($opcion){
         case 1:
-            if (isset($_POST['cod'])) {
-                    $url = $_POST['cod'].'.pdf';
-                    
-                    $mpdf=new \Mpdf\Mpdf();
-                    $css=file_get_contents("../reporte/style.css");
-                    $plantilla=getPlantilla($_POST['cod']);
-                    $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
-                    $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
-                    $mpdf->output($url,"F");
-                    json_encode($url, JSON_UNESCAPED_UNICODE);
+                $sqlEstadoCaja = "SELECT COUNT(cod_encomienda_datos) AS cantidad FROM `encomiendas_datos` WHERE cod_encomiendas IS NULL";
+                $queryEstadoCaja = mysqli_query($conex , $sqlEstadoCaja);
+                $cantidad = mysqli_fetch_assoc($queryEstadoCaja);
+                $cantidad = $cantidad['cantidad'];
+                if ($cantidad >= 1) {
+                    $CrearPDF = "INSERT INTO `encomiendas`( `comisionista`, `cant_planilla`, `importe`, `observacion`) VALUES ('$comisionista', '$cantidad', '$importe', '$comentario')";
+                    $queryCrearPDF = mysqli_query($conex , $CrearPDF);
+                    $cod = mysqli_insert_id($conex);
+
+                    $updateEncomienda = "UPDATE `encomiendas_datos` SET `cod_encomiendas`= '$cod' WHERE  `cod_encomiendas` IS NULL";
+                    $queryUpdateEncomienda = mysqli_query($conex , $updateEncomienda);
+
+                    if ($cod > 1) {
+                        $data = $cod.'.pdf';
+                        
+                        $mpdf=new \Mpdf\Mpdf();
+                        $css=file_get_contents("../reporte/style.css");
+                        $plantilla=getPlantilla($cod);
+                        $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
+                        $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
+                        $mpdf->output($data,"F");
+                        //json_encode($url, JSON_UNESCAPED_UNICODE);
+                    }
                 }
+
+            
             break;
         case 2:
-            if (isset($_POST['cod'])) {
-                    $url = $_POST['cod'].'.pdf';
+            if (isset($cod)) {
+                    $url = '../pdf/'.$cod;
                     if (unlink($url)) {
-                        $url = 1;
+                        $data = 1;
                     }
-                    json_encode($url, JSON_UNESCAPED_UNICODE);
                 }
             break;
         case 4:

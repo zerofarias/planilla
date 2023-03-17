@@ -127,16 +127,18 @@ $(document).ready(function() {
 
 
 
-    function BorrarPDF(string){
-        if (string.includes('https://camaravm.com.ar/autogestion/')) {
-                const cod = string.slice(56)
+    function BorrarPDF(cod){
+        if (cod.length >= 1) {
                 $.ajax({
                     url: "pdf/pdf.php",
                     method: "POST",
                     data: { cod: cod, opcion:2 },
                     datatype: "json",
                     success: function(data) {
-                        document.getElementById("formQR").reset();
+                        if (data = 1) {
+                            document.getElementById("formQR").reset();
+                            total()
+                        }
                     },
                     error: function(data) { 
                         Swal.fire({
@@ -151,6 +153,33 @@ $(document).ready(function() {
         }
     }
 
+    function GererarPDF(comisionista,importe,comentario) {
+        $.ajax({
+            url: "pdf/pdf.php",
+            method: "POST",
+            data: { comisionista :comisionista ,importe : importe,comentario : comentario,opcion:1 },
+            datatype: "json",
+            success: function(data) {
+                var data = data.replace('"', '');
+                var data = data.replace('"', '');
+                let dir = document.getElementById('pdf');
+                let url = $(dir).attr( "src", "pdf/"+data );
+                $('#modalEnvio').modal('hide');
+
+                document.getElementById("formQR").reset();
+                $("#codigoPDF").val(data);
+                $('#modalPDF').modal('show');
+            },
+            error: function(data) { 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR : '+data,
+                    text: 'Comuniquese con el administrador'
+                })
+            },
+        })
+    }
+
 
 
     $(document).on('click','#buscar',function(event){
@@ -162,7 +191,7 @@ $(document).ready(function() {
 
     $(document).on('click','#cerrarPDF',function(event){
         event.preventDefault();    
-        let qr = document.getElementById('qr').value;
+        let qr = document.getElementById('codigoPDF').value;
         BorrarPDF(qr);
     });
 
@@ -178,6 +207,22 @@ $(document).ready(function() {
         let qr = document.getElementById('qr').value;
         $("#qr").val('https://camaravm.com.ar/autogestion/seguimientoPlanilla/726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387');
         
+    });
+
+    $(document).on('click','#grabar',function(event){
+        event.preventDefault();    
+        let comisionista = document.getElementById('comisionista').value;
+        let importe = document.getElementById('importe').value;
+        let comentario = document.getElementById('comentario').value;
+        if (comisionista.length >= 1) {
+            GererarPDF(comisionista,importe,comentario)
+        }else{
+            Swal.fire(
+                'DEBE INGRESAR UN COMISIONISTA/CADETE',
+                'por favor complete los campos',
+                'question'
+            )
+        }
     });
 
     
@@ -207,13 +252,15 @@ $(document).ready(function() {
             data: { opcion: 6 },
             success: (total) => {
                 imp = JSON.parse(total);
-                console.log(imp.cantidad);
                 if (imp.cantidad >= 1) {
                     $("#bloque").attr("hidden",false);
+                    $("#botonera").attr("hidden",false);
+
                     document.getElementById("cantidad").innerHTML = "Cantidad <b>"+ imp.cantidad;
                     tablaDetalle();
                 }if (imp.cantidad < 1) {
                     $("#bloque").attr("hidden",true);
+                    $("#botonera").attr("hidden",true);
                 }
                 
                 
@@ -226,72 +273,3 @@ $(document).ready(function() {
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function ValidarQR (string){
-//    if (string.length >= 1) {
-//        if (string.includes('https://camaravm.com.ar/autogestion/')) {
-//            const cod = string.slice(56)
-//            $.ajax({
-//                url: "pdf/pdf.php",
-//                method: "POST",
-//                data: { cod: cod, opcion:1 },
-//                datatype: "json",
-//                    success: function(data) {
-//                        let dir = document.getElementById('pdf');
-//                        var url = $(dir).attr( "src", "pdf/"+cod+".pdf" );
-//                        $('#modalPDF').modal('show');
-//                    },
-//                    error: function(data) { 
-//                        Swal.fire({
-//                            icon: 'error',
-//                            title: 'ERROR : '+data,
-//                            text: 'Comuniquese con el administrador'
-//                        })
-//                    },
-//            })
-//    }else{
-//            Swal.fire({
-//                icon: 'error',
-//                title: 'CODIGO QR NO VALIDO',
-//                text: 'no se encuentra codigo , o el mismo no es valido'
-//            })
-//            document.getElementById("formQR").reset();
-//        }
-//}else{
-//        Swal.fire(
-//            'CODIGO QR VACIO',
-//            'por favor escane el codigo QR',
-//            'question'
-//        )
-//        document.getElementById("formQR").reset();
-//    }
-//};
-//
-
-
-            //$.ajax({
-            //  url: "../bd/datos.php",
-            //  method: "POST",
-            //  data: { id: id, opcion: opcion },
-            //  datatype: "json",
-            //  beforeSend:function() {
-            //    document.getElementById('loading').style.display='block';
-            //    document.getElementById('loading').innerHTML='<img src="../img/load.gif" width="150" height="150">'
-            //  },
-            //  success: function(data) {
-            //    tablaDatosExterno.ajax.reload(null, false);
-            //    document.getElementById('loading').style.display='none';
-            //  }
-            //})

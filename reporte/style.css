@@ -125,9 +125,9 @@
         right: 50;
     }
     
-    div.puntos {
+    .footer {
         position: absolute;
-        margin-top: 600px;
+        margin-top: -50px;
         height: 19px;
     }
     
