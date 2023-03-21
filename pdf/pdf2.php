@@ -1,7 +1,7 @@
 <?php
     require '../vendor/autoload.php';
     require '../reporte/index.php';
-    $cod=38;
+    $cod=16;
     $data = $cod.'.pdf';
                         
                         $mpdf=new \Mpdf\Mpdf();

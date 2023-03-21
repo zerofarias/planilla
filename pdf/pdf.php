@@ -12,6 +12,11 @@
     $comisionista = (isset($_POST['comisionista'])) ? $_POST['comisionista'] : '';
     $importe = (isset($_POST['importe'])) ? $_POST['importe'] : '';
     $comentario = (isset($_POST['comentario'])) ? $_POST['comentario'] : '';
+    $tipo = (isset($_POST['tipo'])) ? $_POST['tipo'] : '';
+    $concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : '';
+    $farmacia = (isset($_POST['farmacia'])) ? $_POST['farmacia'] : '';
+
+    
 
     switch ($opcion){
         case 1:
@@ -20,7 +25,7 @@
                 $cantidad = mysqli_fetch_assoc($queryEstadoCaja);
                 $cantidad = $cantidad['cantidad'];
                 if ($cantidad >= 1) {
-                    $CrearPDF = "INSERT INTO `encomiendas`( `comisionista`, `cant_planilla`, `importe`, `observacion`) VALUES ('$comisionista', '$cantidad', '$importe', '$comentario')";
+                    $CrearPDF = "INSERT INTO `encomiendas`( `comisionista`, `cant_planilla`, `importe`, `observacion`,`tipo_envio`, `concepto`) VALUES ('$comisionista', '$cantidad', '$importe', '$comentario', $tipo ,'$concepto')";
                     $queryCrearPDF = mysqli_query($conex , $CrearPDF);
                     $cod = mysqli_insert_id($conex);
 
@@ -99,6 +104,25 @@
             $queryEstadoCaja = mysqli_query($conex , $sqlEstadoCaja);
             $data = mysqli_fetch_assoc($queryEstadoCaja);
             $data['cantidad'];
+
+        break;
+    case 8:
+    
+            $CrearPDF = "INSERT INTO `encomiendas`( `comisionista`, `importe`, `observacion`,`tipo_envio`, `concepto` , `farmacia_direccion`) VALUES ('$comisionista', '$importe', '$comentario', $tipo ,'$concepto','$farmacia')";
+            $queryCrearPDF = mysqli_query($conex , $CrearPDF);
+            $cod = mysqli_insert_id($conex);
+
+            if ($cod > 1) {
+                $data = $cod.'.pdf';
+                
+                $mpdf=new \Mpdf\Mpdf();
+                $css=file_get_contents("../reporte/style.css");
+                $plantilla=getPlantilla($cod);
+                $mpdf->writeHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
+                $mpdf->writeHTML($plantilla,\Mpdf\HTMLParserMode::HTML_BODY);
+                $mpdf->output($data,"F");
+                //json_encode($url, JSON_UNESCAPED_UNICODE);
+            }
 
         break;
         }

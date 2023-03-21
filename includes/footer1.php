@@ -19,10 +19,7 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<!-- Funcion propia -->
-<script type="text/javascript" src="js/function.js"></script> 
 
-<!-- Funcion propia -->
 <script type="text/javascript" src="js/functionEnv.js"></script> 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

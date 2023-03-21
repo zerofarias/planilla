@@ -53,18 +53,20 @@
           <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="https://camaravm.com.ar/" class="nav-link">
+            <a href="envio.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Pagina Camara
-                <i class="right fas fa-angle-left"></i>
+                ENVIAR COMISION
+                <i class="right fas fa-angle-left" id="enviarModal"></i>
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Informational</p>
+            <a href="index.php" class="nav-link">
+            <span class="material-symbols-outlined">
+                qr_code_scanner
+            </span>
+              <p>RECEPCION QR</p>
             </a>
           </li>
         </ul>

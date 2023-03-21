@@ -59,8 +59,9 @@ $(document).ready(function() {
 
     function ValidarQR (string){
         if (string.length >= 1) {
-            if (string.includes('https://camaravm.com.ar/autogestion/')) {
+            if (string.includes('camaravm.com.ar')) {
                 const cod = string.slice(56)
+                console.log(cod);
                 $.ajax({
                     url: "pdf/pdf.php",
                     method: "POST",
@@ -113,6 +114,7 @@ $(document).ready(function() {
                     text: 'no se encuentra codigo , o el mismo no es valido'
                 })
                 document.getElementById("formQR").reset();
+                document.getElementById("formCierre").reset();
             }
     }else{
             Swal.fire(
@@ -121,6 +123,7 @@ $(document).ready(function() {
                 'question'
             )
             document.getElementById("formQR").reset();
+            document.getElementById("formCierre").reset();
         }
     };
 
@@ -137,6 +140,7 @@ $(document).ready(function() {
                     success: function(data) {
                         if (data = 1) {
                             document.getElementById("formQR").reset();
+                            document.getElementById("formCierre").reset();
                             total()
                         }
                     },
@@ -154,10 +158,11 @@ $(document).ready(function() {
     }
 
     function GererarPDF(comisionista,importe,comentario) {
+        
         $.ajax({
             url: "pdf/pdf.php",
             method: "POST",
-            data: { comisionista :comisionista ,importe : importe,comentario : comentario,opcion:1 },
+            data: { comisionista :comisionista ,importe : importe,comentario : comentario,opcion:1 ,tipo:1 },
             datatype: "json",
             success: function(data) {
                 var data = data.replace('"', '');
@@ -202,13 +207,6 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click','#i',function(event){
-        event.preventDefault();    
-        let qr = document.getElementById('qr').value;
-        $("#qr").val('https://camaravm.com.ar/autogestion/seguimientoPlanilla/726287e201a0c53944131c6fd314f3871c5368efaba9668702bb2ccf587ab387');
-        
-    });
-
     $(document).on('click','#grabar',function(event){
         event.preventDefault();    
         let comisionista = document.getElementById('comisionista').value;
@@ -237,8 +235,7 @@ $(document).ready(function() {
             data: { opcion: 7 , cod: cod },
             success: () => {
                 tablaDetalle()
-                //lstProductosVenta.ajax.reload(null, false);
-                //lstProductosVenta.destroy();
+                
                 total();
             }
         });
@@ -270,6 +267,13 @@ $(document).ready(function() {
         }
     
     total();
+
+    
+    $(document).on('click','#enviarModal',function(event){
+        event.preventDefault();    
+        console.log('fsfsfsd');
+        $('#bloque').modal('show');
+    });
 
 
 });
